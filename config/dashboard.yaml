@@ -1,0 +1,69 @@
+datasource:
+  type: grafana-postgresql-datasource
+  uid: timescaledb
+
+database:
+  time_column: time
+  value_column: value
+
+dashboard:
+  refresh: 10s
+  default_from: now-6h
+  default_to: now
+  editable: true
+  schema_version: 39
+  tags:
+    - BATMACHINE
+    - equipment-wrapper
+    - semantic-dashboard
+
+#   Property appears in multiple equipment wrappers.
+generic:
+  title: "<equipmentname> generic equipment dashboard"
+
+  description: >
+    Describe the set of semantic properties that represent functionality
+    commonly available across multiple equipment wrappers.
+
+    Typical examples include furnace temperatures, fan speeds,
+    winding parameters, process temperatures, pressures, flow rates,
+    and other measurements that can be compared across different
+    equipment types.
+
+  properties:
+    # Add semantic properties that are expected to be present
+    # in multiple equipment wrappers.
+    #
+    # Example:
+    # - coater:hasWinderDiameterData
+    # - coater:hasWinderTensionData
+    # - coater:hasFurnaceTemperatureData
+    # - coater:hasFurnaceFanData
+    #
+    # Add one property per line.
+
+# Property appears only in the current equipment wrapper.
+equipment_specific:
+  title: "<equipmentname> equipment-specific dashboard"
+
+  description: >
+    Describe semantic properties that are unique to this equipment
+    wrapper and are not generally expected to be available across
+    other equipment.
+
+    Typical examples include machine-specific controls, unique sensors,
+    proprietary process measurements, specialised positioning systems,
+    or equipment-specific operating parameters.
+
+  properties:
+    # Add semantic properties that are specific to this equipment.
+    #
+    # Example:
+    # - coater:hasWebSpeedData
+    # - coater:hasCoaterHeadHorizontalPositionControl
+    # - coater:hasCoaterHeadVerticalPositionControl
+    # - coater:hasIRPyrometerTemperatureData
+    # - coater:hasFurnacePowerData
+    #
+    # Add one property per line.
+    

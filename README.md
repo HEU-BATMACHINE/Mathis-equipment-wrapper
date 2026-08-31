@@ -120,6 +120,7 @@ The following files contain the generic generation logic:
 ```text
 scripts/generate_wrapper.py
 scripts/visualize_wrapper.py
+scripts/generate_dashboards.py
 ```
 
 ### Generated outputs
@@ -131,6 +132,9 @@ generated/table_channels_<equipment>.ttl
 generated/nodelist.csv
 generated/init.sql
 generated/visualization/graph.html
+generated/dashboards/<equipment>_generic.json
+generated/dashboards/<equipment>_specific.json
+generated/dashboards/generation_report.json
 ```
 
 Generated files should not normally be edited manually. Changes should be made in the wrapper configuration, channel configuration, equipment ontology, or generation logic. The outputs should then be regenerated.

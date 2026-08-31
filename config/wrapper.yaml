@@ -1,50 +1,41 @@
 wrapper:
-  identifier: equipment
-  name: Equipment name
-  description: Semantic wrapper for the equipment
+  identifier: mathis
+  name:  Mathis Coater
+  description: Semantic wrapper for the Mathis coating and drying equipment
 
 ontology:
-  channel_prefix: equipment-table
-  channel_namespace: https://example.org/equipment-table/ontology#
-  channel_ontology_iri: https://example.org/equipment-table/ontology
+  channel_prefix: mathis-table
+  channel_namespace: https://w3id.org/mathis-table/public/ontology#
+  channel_ontology_iri: https://w3id.org/mathis-table/public/ontology
 
-  individuals_prefix: equipment-ind
-  individuals_namespace: https://example.org/equipment-individuals/ontology#
-  individuals_ontology_iri: https://example.org/equipment-individuals/ontology
+  individuals_prefix: mathis-ind
+  individuals_namespace: https://w3id.org/mathis-ind/public/ontology#
+  individuals_ontology_iri: https://w3id.org/mathis-ind/public/ontology
 
-  domain_prefix: equipment
-  domain_namespace: https://example.org/equipment/ontology#
-  domain_ontology_iri: https://example.org/equipment/ontology
+  domain_prefix: mathis
+  domain_namespace: https://w3id.org/mathis/public/ontology#
+  domain_ontology_iri: https://w3id.org/mathis/public/ontology
 
 semantic_model:
-  # RDF class used for measurement channels
   measurement_channel_class: emmo:EMMO_0f6f0120_c079_4d95_bb11_4ddee05e530e
-
-  # RDF class used for control/setpoint channels
   control_channel_class: coater:CommandInput
 
-  # Process class created for measurement channels
   measurement_process_class: chameo:CharacterisationMeasurementProcess
+  control_process_class: mathis-table:DeviceControlProcess
 
-  # Process class created for control channels
-  control_process_class: equipment:DeviceControlProcess
+  measurement_device_property: chameo:hasMeasurementSample
+  control_device_property: chameo:hasInteractionWithSample
 
-  # Property connecting process -> device
-  measurement_device_property: emmo:EMMO_35c29eb6_f57e_48d8_85af_854f9e926e77
-  control_device_property: emmo:EMMO_35c29eb6_f57e_48d8_85af_854f9e926e77
-
-  # Property connecting process -> channel
   measurement_output_property: emmo:EMMO_c4bace1d_4db0_4cd3_87e9_18122bae2840
   control_input_property: emmo:EMMO_36e69413_8c59_4799_946c_10b05d266e22
 
-  # CSV schema properties
   timestamp_property: equipment:hasDateTimeStampData
-  unit_property: emmo:EMMO_02c0621e_a527_4790_8a0f_2bb51973c819
+  unit_property: emmo:EMMO_bed1d005_b04e_4a90_94cf_02bc678a8569
 
 files:
   channels: config/channels.csv
-  individuals: ontology/equipment_individuals.ttl
-  generated_ontology: generated/table_channels_equipment.ttl
+  individuals: ontology/mathis_individuals.ttl
+  generated_ontology: generated/table_channels_mathis.ttl
   nodelist: generated/nodelist.csv
   database_schema: generated/init.sql
   visualization: generated/visualization/graph.html

@@ -1,0 +1,154 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix emmo: <https://w3id.org/emmo#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix battinfo: <http://w3id.org/battinfo#> .
+@prefix chameo: <https://w3id.org/emmo/domain/characterisation-methodology/chameo#> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix vann:    <http://purl.org/vocab/vann/> .
+@prefix csvw: <http://www.w3.org/ns/csvw#> .
+
+@prefix equipment: <https://w3id.org/batteryequipment/public/ontology#> .
+@prefix coater: <https://w3id.org/coater/public/ontology#> .
+@prefix mathis: <https://w3id.org/mathis/public/ontology#> .
+@prefix mathis-ind: <https://w3id.org/mathis-ind/public/ontology#> .
+
+<https://w3id.org/mathis-ind/public/ontology> rdf:type owl:Ontology ;
+        owl:imports <https://raw.githubusercontent.com/HEU-BATMACHINE/mathis-public-resources/refs/heads/main/mathis2.ttl> .
+
+
+#-----------------------------------------
+# Mathis Equipment definitions
+#-----------------------------------------
+
+#-------------------------------------------
+# create the individual SINTEF Mathis coater
+mathis-ind:SINTEF_Mathis_Coater rdf:type coater:CoaterDryerEquipment .
+mathis-ind:SINTEF_Mathis_Coater rdf:type owl:NamedIndividual .
+mathis-ind:SINTEF_Mathis_Coater rdfs:label "SINTEF Mathis coater" .
+mathis-ind:SINTEF_Mathis_Coater equipment:hasDevice coater:SINTEF_Mathis_CoatingDevice .
+mathis-ind:SINTEF_Mathis_Coater equipment:hasDevice mathis-ind:SINTEF_Mathis_UnwindingDevice .
+mathis-ind:SINTEF_Mathis_Coater equipment:hasDevice mathis-ind:SINTEF_Mathis_RewindingDevice .
+mathis-ind:SINTEF_Mathis_Coater equipment:hasDevice mathis-ind:SINTEF_Mathis_IR_DryerDevice .
+mathis-ind:SINTEF_Mathis_Coater equipment:hasDevice mathis-ind:SINTEF_Mathis_HotAir_DryerDevice .
+
+# create the individual Devices
+mathis-ind:SINTEF_Mathis_CoatingDevice rdf:type coater:CoatingDevice .
+mathis-ind:SINTEF_Mathis_CoatingDevice rdf:type owl:NamedIndividual .
+mathis-ind:SINTEF_Mathis_CoatingDevice rdfs:label "SINTEF Mathis CoatingDevice" .
+
+mathis-ind:SINTEF_Mathis_UnwindingDevice rdf:type coater:UnwindingDevice .
+mathis-ind:SINTEF_Mathis_UnwindingDevice rdf:type owl:NamedIndividual .
+mathis-ind:SINTEF_Mathis_UnwindingDevice rdfs:label "SINTEF Mathis UnwindingDevice" .
+
+mathis-ind:SINTEF_Mathis_RewindingDevice rdf:type coater:RewindingDevice .
+mathis-ind:SINTEF_Mathis_RewindingDevice rdf:type owl:NamedIndividual .
+mathis-ind:SINTEF_Mathis_RewindingDevice rdfs:label "SINTEF Mathis RewindingDevice" .
+
+mathis-ind:SINTEF_Mathis_IR_DryerDevice rdf:type coater:IR_DryerDevice .
+mathis-ind:SINTEF_Mathis_IR_DryerDevice rdf:type owl:NamedIndividual .
+mathis-ind:SINTEF_Mathis_IR_DryerDevice rdfs:label "SINTEF Mathis IR_DryerDevice" .
+
+mathis-ind:SINTEF_Mathis_HotAir_DryerDevice rdf:type coater:HotAir_DryerDevice .
+mathis-ind:SINTEF_Mathis_HotAir_DryerDevice rdf:type owl:NamedIndividual .
+mathis-ind:SINTEF_Mathis_HotAir_DryerDevice rdfs:label "SINTEF Mathis HotAir_DryerDevice" .
+
+mathis-ind:SINTEF_Mathis_HotAir_Dryer1Device rdf:type coater:HotAir_DryerDevice1 .
+mathis-ind:SINTEF_Mathis_HotAir_Dryer1Device rdf:type owl:NamedIndividual .
+mathis-ind:SINTEF_Mathis_HotAir_Dryer1Device rdfs:label "SINTEF Mathis HotAir_Dryer1Device" .
+mathis-ind:SINTEF_Mathis_HotAir_DryerDevice emmo:EMMO_17e27c22_37e1_468c_9dd7_95e137f73e7f mathis-ind:SINTEF_Mathis_HotAir_Dryer1Device .
+
+mathis-ind:SINTEF_Mathis_HotAir_Dryer2Device rdf:type coater:HotAir_DryerDevice2 .
+mathis-ind:SINTEF_Mathis_HotAir_Dryer2Device rdf:type owl:NamedIndividual .
+mathis-ind:SINTEF_Mathis_HotAir_Dryer2Device rdfs:label "SINTEF Mathis HotAir_Dryer2Device" .
+mathis-ind:SINTEF_Mathis_HotAir_DryerDevice emmo:EMMO_17e27c22_37e1_468c_9dd7_95e137f73e7f mathis-ind:SINTEF_Mathis_HotAir_Dryer2Device .
+mathis-ind:SINTEF_Mathis_HotAir_Dryer2Device emmo:EMMO_60c57607_c9e7_4e75_a3d1_7a1f1f9928e4 mathis-ind:SINTEF_Mathis_HotAir_Dryer1Device .
+
+mathis-ind:SINTEF_Mathis_HotAir_Dryer1Bottom rdf:type mathis:HotAir_DryerDevice1Bottom .
+mathis-ind:SINTEF_Mathis_HotAir_Dryer1Bottom rdf:type owl:NamedIndividual .
+mathis-ind:SINTEF_Mathis_HotAir_Dryer1Bottom rdfs:label "SINTEF Mathis HotAir_DryerDevice1Bottom" .
+mathis-ind:SINTEF_Mathis_HotAir_Dryer1Device emmo:EMMO_17e27c22_37e1_468c_9dd7_95e137f73e7f mathis-ind:SINTEF_Mathis_HotAir_Dryer1Bottom .
+
+mathis-ind:SINTEF_Mathis_HotAir_Dryer1Top rdf:type mathis:HotAir_DryerDevice1Top .
+mathis-ind:SINTEF_Mathis_HotAir_Dryer1Top rdf:type owl:NamedIndividual .
+mathis-ind:SINTEF_Mathis_HotAir_Dryer1Top rdfs:label "SINTEF Mathis HotAir_DryerDevice1Top" .
+mathis-ind:SINTEF_Mathis_HotAir_Dryer1Device emmo:EMMO_17e27c22_37e1_468c_9dd7_95e137f73e7f mathis-ind:SINTEF_Mathis_HotAir_Dryer1Top .
+
+mathis-ind:SINTEF_Mathis_HotAir_Dryer2Bottom rdf:type mathis:HotAir_DryerDevice2Bottom .
+mathis-ind:SINTEF_Mathis_HotAir_Dryer2Bottom rdf:type owl:NamedIndividual .
+mathis-ind:SINTEF_Mathis_HotAir_Dryer2Bottom rdfs:label "SINTEF Mathis HotAir_DryerDevice2Bottom" .
+mathis-ind:SINTEF_Mathis_HotAir_Dryer2Device emmo:EMMO_17e27c22_37e1_468c_9dd7_95e137f73e7f mathis-ind:SINTEF_Mathis_HotAir_Dryer2Bottom .
+
+mathis-ind:SINTEF_Mathis_HotAir_Dryer2Top rdf:type mathis:HotAir_DryerDevice2Top .
+mathis-ind:SINTEF_Mathis_HotAir_Dryer2Top rdf:type owl:NamedIndividual .
+mathis-ind:SINTEF_Mathis_HotAir_Dryer2Top rdfs:label "SINTEF Mathis HotAir_DryerDevice2Top" .
+mathis-ind:SINTEF_Mathis_HotAir_Dryer2Device emmo:EMMO_17e27c22_37e1_468c_9dd7_95e137f73e7f mathis-ind:SINTEF_Mathis_HotAir_Dryer2Top .
+
+#-----------------------------------------------------
+# create the individual SINTEF Mathis coater processes
+mathis-ind:SINTEF_Mathis_CoaterProcess rdf:type coater:ElectrodeCoatingDryingProcess ;
+        rdf:type owl:NamedIndividual ;
+        rdfs:label "SINTEF Mathis Coating Drying Process"@en ;
+        # EMMO concept for hasTemporaryParticipant https://w3id.org/emmo#EMMO_35c29eb6_f57e_48d8_85af_854f9e926e77
+        emmo:EMMO_35c29eb6_f57e_48d8_85af_854f9e926e77 mathis-ind:SINTEF_Mathis_Coater ;
+        # EMMO concept for hasPart: https://w3id.org/emmo#EMMO_17e27c22_37e1_468c_9dd7_95e137f73e7f
+        emmo:EMMO_17e27c22_37e1_468c_9dd7_95e137f73e7f mathis-ind:SINTEF_Mathis_UnwindingProcess ;
+        emmo:EMMO_17e27c22_37e1_468c_9dd7_95e137f73e7f mathis-ind:SINTEF_Mathis_CoatingProcess ;
+        emmo:EMMO_17e27c22_37e1_468c_9dd7_95e137f73e7f mathis-ind:SINTEF_Mathis_IR_DryingProcess ;
+        emmo:EMMO_17e27c22_37e1_468c_9dd7_95e137f73e7f mathis-ind:SINTEF_Mathis_HA_DryingProcess ;
+        emmo:EMMO_17e27c22_37e1_468c_9dd7_95e137f73e7f mathis-ind:SINTEF_Mathis_RewindingProcess .
+
+
+mathis-ind:SINTEF_Mathis_CoatingProcess rdf:type coater:ElectrodeCoatingProcess ;
+        rdf:type owl:NamedIndividual ;
+        rdfs:label "SINTEF Mathis Coating Process"@en ;
+        # EMMO concept for hasTemporaryParticipant https://w3id.org/emmo#EMMO_35c29eb6_f57e_48d8_85af_854f9e926e77
+        emmo:EMMO_35c29eb6_f57e_48d8_85af_854f9e926e77 mathis-ind:SINTEF_Mathis_CoatingDevice .
+
+mathis-ind:SINTEF_Mathis_UnwindingProcess rdf:type coater:ElectrodeUnwindingProcess ;
+        rdf:type owl:NamedIndividual ;
+        rdfs:label "SINTEF Mathis Unwinding Process"@en ;
+        # EMMO concept for hasTemporaryParticipant https://w3id.org/emmo#EMMO_35c29eb6_f57e_48d8_85af_854f9e926e77
+        emmo:EMMO_35c29eb6_f57e_48d8_85af_854f9e926e77 mathis-ind:SINTEF_Mathis_UnwindingDevice .
+
+mathis-ind:SINTEF_Mathis_RewindingProcess rdf:type coater:ElectrodeRewindingProcess ;
+        rdf:type owl:NamedIndividual ;
+        rdfs:label "SINTEF Mathis Rewinding Process"@en ;
+        # EMMO concept for hasTemporaryParticipant https://w3id.org/emmo#EMMO_35c29eb6_f57e_48d8_85af_854f9e926e77
+        emmo:EMMO_35c29eb6_f57e_48d8_85af_854f9e926e77 mathis-ind:SINTEF_Mathis_RewindingDevice .
+
+mathis-ind:SINTEF_Mathis_IR_DryingProcess rdf:type coater:ElectrodeDryingProcess ;
+        rdf:type owl:NamedIndividual ;
+        rdfs:label "SINTEF Mathis IR Drying Process"@en ;
+        # EMMO concept for hasTemporaryParticipant https://w3id.org/emmo#EMMO_35c29eb6_f57e_48d8_85af_854f9e926e77
+        emmo:EMMO_35c29eb6_f57e_48d8_85af_854f9e926e77 mathis-ind:SINTEF_Mathis_IR_DryerDevice .
+
+mathis-ind:SINTEF_Mathis_HA_DryingProcess rdf:type coater:ElectrodeDryingProcess ;
+        rdf:type owl:NamedIndividual ;
+        rdfs:label "SINTEF Mathis Hot Air Drying Process"@en ;
+        # EMMO concept for hasTemporaryParticipant https://w3id.org/emmo#EMMO_35c29eb6_f57e_48d8_85af_854f9e926e77
+        emmo:EMMO_35c29eb6_f57e_48d8_85af_854f9e926e77 mathis-ind:SINTEF_Mathis_HotAir_DryerDevice .
+
+# workflow hasNext emmo:EMMO_499e24a5_5072_4c83_8625_fe3f96ae4a8d
+mathis-ind:SINTEF_Mathis_UnwindingProcess emmo:EMMO_499e24a5_5072_4c83_8625_fe3f96ae4a8d mathis-ind:SINTEF_Mathis_CoatingProcess .
+mathis-ind:SINTEF_Mathis_CoatingProcess emmo:EMMO_499e24a5_5072_4c83_8625_fe3f96ae4a8d mathis-ind:SINTEF_Mathis_IR_DryingProcess .
+mathis-ind:SINTEF_Mathis_IR_DryingProcess emmo:EMMO_499e24a5_5072_4c83_8625_fe3f96ae4a8d mathis-ind:SINTEF_Mathis_HA_DryingProcess .
+mathis-ind:SINTEF_Mathis_HA_DryingProcess emmo:EMMO_499e24a5_5072_4c83_8625_fe3f96ae4a8d mathis-ind:SINTEF_Mathis_RewindingProcess .
+
+### Example Individuals ###
+
+mathis-ind:SINTEF_Mathis_Coater rdf:type equipment:ManufacturingEquipment ;
+    equipment:hasEquipmentModel "Mathis KTF-S 29421" ;
+    coater:hasCoatingSpeedMin 0.1 ;
+    coater:hasCoatingSpeedMax 10.0 ;
+    coater:hasRollerWidth 350.0 ;
+    coater:hasSubstrateWidth 300.0 .
+
+mathis-ind:SINTEF_Mathis_CoatingDevice rdf:type coater:CoatingDevice ;
+    coater:hasCoatingWidth 250.0 .
+
+mathis-ind:SINTEF_Mathis_HotAir_DryerDevice rdf:type coater:HotAir_DryerDevice ;
+    coater:hasTemperatureMax 250.0 .

@@ -1,0 +1,32 @@
+{
+  "equipment": {
+    "identifier": "mathis",
+    "name": "Mathis Coater"
+  },
+  "input": {
+    "channels": "config\\channels.csv",
+    "dashboard_config": "config\\dashboard.yaml",
+    "channel_count": 16
+  },
+  "generic_dashboard": {
+    "file": "generated\\dashboards\\mathis_generic.json",
+    "configured_properties": [
+      "coater:hasWinderDiameterData",
+      "coater:hasWinderTensionData",
+      "coater:hasFurnaceTemperatureData",
+      "coater:hasFurnaceFanData"
+    ],
+    "matched_channel_count": 11,
+    "missing_properties": []
+  },
+  "equipment_specific_dashboard": {
+    "file": "generated\\dashboards\\mathis_specific.json",
+    "configured_properties": [
+      "coater:hasIRPyrometerTemperatureData",
+      "coater:hasFurnaceFanControl"
+    ],
+    "matched_channel_count": 5,
+    "missing_properties": []
+  },
+  "unclassified_properties": []
+}

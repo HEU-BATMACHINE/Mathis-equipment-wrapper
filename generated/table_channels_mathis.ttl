@@ -1,0 +1,461 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix emmo: <https://w3id.org/emmo#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix battinfo: <http://w3id.org/battinfo#> .
+@prefix chameo: <https://w3id.org/emmo/domain/characterisation-methodology/chameo#> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix vann: <http://purl.org/vocab/vann/> .
+@prefix csvw: <http://www.w3.org/ns/csvw#> .
+
+@prefix equipment: <https://w3id.org/batteryequipment/public/ontology#> .
+@prefix coater: <https://w3id.org/coater/public/ontology#> .
+@prefix mathis: <https://w3id.org/mathis/public/ontology#> .
+@prefix mathis-ind: <https://w3id.org/mathis-ind/public/ontology#> .
+@prefix mathis-table: <https://w3id.org/mathis-table/public/ontology#> .
+
+<https://w3id.org/mathis-table/public/ontology> rdf:type owl:Ontology ;
+    owl:imports <../ontology/mathis_individuals.ttl> ;
+    rdfs:label "Channel and table ontology for Mathis Coater" ;
+    rdfs:comment "Semantic wrapper for the Mathis coating and drying equipment" .
+
+
+# -------------------------------------------------------------------
+# Channel and schema definitions
+# -------------------------------------------------------------------
+
+
+mathis-table:PyrometerIR_Dryer a emmo:EMMO_0f6f0120_c079_4d95_bb11_4ddee05e530e .
+mathis-table:PyrometerIR_Dryer dc:title "IR_Dryer_PyrometerTemp" .
+mathis-table:PyrometerIR_Dryer csvw:tableSchema mathis-table:PyrometerIR_Dryer_schema .
+
+mathis-table:PyrometerIR_Dryer_schema a csvw:Schema .
+mathis-table:PyrometerIR_Dryer_schema csvw:columns mathis-table:PyrometerIR_Dryer_schema_col1 .
+mathis-table:PyrometerIR_Dryer_schema csvw:columns mathis-table:PyrometerIR_Dryer_schema_col2 .
+mathis-table:PyrometerIR_Dryer_schema csvw:primaryKey "time" .
+
+mathis-table:PyrometerIR_Dryer_process a chameo:CharacterisationMeasurementProcess ;
+    chameo:hasMeasurementSample mathis-ind:SINTEF_Mathis_IR_DryerDevice ;
+    emmo:EMMO_c4bace1d_4db0_4cd3_87e9_18122bae2840 mathis-table:PyrometerIR_Dryer .
+
+mathis-table:PyrometerIR_Dryer_schema_col1 a csvw:Column .
+mathis-table:PyrometerIR_Dryer_schema_col1 csvw:propertyUrl equipment:hasDateTimeStampData .
+mathis-table:PyrometerIR_Dryer_schema_col1 csvw:datatype xsd:dateTime .
+mathis-table:PyrometerIR_Dryer_schema_col1 csvw:name "time" .
+mathis-table:PyrometerIR_Dryer_schema_col1 csvw:required true .
+
+mathis-table:PyrometerIR_Dryer_schema_col2 a csvw:Column .
+mathis-table:PyrometerIR_Dryer_schema_col2 csvw:propertyUrl coater:hasIRPyrometerTemperatureData .
+mathis-table:PyrometerIR_Dryer_schema_col2 csvw:datatype xsd:decimal .
+mathis-table:PyrometerIR_Dryer_schema_col2 emmo:EMMO_bed1d005_b04e_4a90_94cf_02bc678a8569 <https://w3id.org/emmo#DegreeCelsius> .
+mathis-table:PyrometerIR_Dryer_schema_col2 csvw:name "value" .
+mathis-table:PyrometerIR_Dryer_schema_col2 csvw:required true .
+
+
+mathis-table:D1BFanControl a coater:CommandInput .
+mathis-table:D1BFanControl dc:title "Dryer1_Bottom_Fan_SP" .
+mathis-table:D1BFanControl csvw:tableSchema mathis-table:D1BFanControl_schema .
+
+mathis-table:D1BFanControl_schema a csvw:Schema .
+mathis-table:D1BFanControl_schema csvw:columns mathis-table:D1BFanControl_schema_col1 .
+mathis-table:D1BFanControl_schema csvw:columns mathis-table:D1BFanControl_schema_col2 .
+mathis-table:D1BFanControl_schema csvw:primaryKey "time" .
+
+mathis-table:D1BFanControl_process a mathis-table:DeviceControlProcess ;
+    chameo:hasInteractionWithSample mathis-ind:SINTEF_Mathis_HotAir_Dryer1Bottom ;
+    emmo:EMMO_36e69413_8c59_4799_946c_10b05d266e22 mathis-table:D1BFanControl .
+
+mathis-table:D1BFanControl_schema_col1 a csvw:Column .
+mathis-table:D1BFanControl_schema_col1 csvw:propertyUrl equipment:hasDateTimeStampData .
+mathis-table:D1BFanControl_schema_col1 csvw:datatype xsd:dateTime .
+mathis-table:D1BFanControl_schema_col1 csvw:name "time" .
+mathis-table:D1BFanControl_schema_col1 csvw:required true .
+
+mathis-table:D1BFanControl_schema_col2 a csvw:Column .
+mathis-table:D1BFanControl_schema_col2 csvw:propertyUrl coater:hasFurnaceFanControl .
+mathis-table:D1BFanControl_schema_col2 csvw:datatype xsd:decimal .
+mathis-table:D1BFanControl_schema_col2 emmo:EMMO_bed1d005_b04e_4a90_94cf_02bc678a8569 <https://w3id.org/emmo#RevolutionPerMinute> .
+mathis-table:D1BFanControl_schema_col2 csvw:name "value" .
+mathis-table:D1BFanControl_schema_col2 csvw:required true .
+
+
+mathis-table:D1TFanControl a coater:CommandInput .
+mathis-table:D1TFanControl dc:title "Dryer1_Top_Fan_SP" .
+mathis-table:D1TFanControl csvw:tableSchema mathis-table:D1TFanControl_schema .
+
+mathis-table:D1TFanControl_schema a csvw:Schema .
+mathis-table:D1TFanControl_schema csvw:columns mathis-table:D1TFanControl_schema_col1 .
+mathis-table:D1TFanControl_schema csvw:columns mathis-table:D1TFanControl_schema_col2 .
+mathis-table:D1TFanControl_schema csvw:primaryKey "time" .
+
+mathis-table:D1TFanControl_process a mathis-table:DeviceControlProcess ;
+    chameo:hasInteractionWithSample mathis-ind:SINTEF_Mathis_HotAir_Dryer1Top ;
+    emmo:EMMO_36e69413_8c59_4799_946c_10b05d266e22 mathis-table:D1TFanControl .
+
+mathis-table:D1TFanControl_schema_col1 a csvw:Column .
+mathis-table:D1TFanControl_schema_col1 csvw:propertyUrl equipment:hasDateTimeStampData .
+mathis-table:D1TFanControl_schema_col1 csvw:datatype xsd:dateTime .
+mathis-table:D1TFanControl_schema_col1 csvw:name "time" .
+mathis-table:D1TFanControl_schema_col1 csvw:required true .
+
+mathis-table:D1TFanControl_schema_col2 a csvw:Column .
+mathis-table:D1TFanControl_schema_col2 csvw:propertyUrl coater:hasFurnaceFanControl .
+mathis-table:D1TFanControl_schema_col2 csvw:datatype xsd:decimal .
+mathis-table:D1TFanControl_schema_col2 emmo:EMMO_bed1d005_b04e_4a90_94cf_02bc678a8569 <https://w3id.org/emmo#RevolutionPerMinute> .
+mathis-table:D1TFanControl_schema_col2 csvw:name "value" .
+mathis-table:D1TFanControl_schema_col2 csvw:required true .
+
+
+mathis-table:D2BFanControl a coater:CommandInput .
+mathis-table:D2BFanControl dc:title "Dryer2_Bottom_Fan_SP" .
+mathis-table:D2BFanControl csvw:tableSchema mathis-table:D2BFanControl_schema .
+
+mathis-table:D2BFanControl_schema a csvw:Schema .
+mathis-table:D2BFanControl_schema csvw:columns mathis-table:D2BFanControl_schema_col1 .
+mathis-table:D2BFanControl_schema csvw:columns mathis-table:D2BFanControl_schema_col2 .
+mathis-table:D2BFanControl_schema csvw:primaryKey "time" .
+
+mathis-table:D2BFanControl_process a mathis-table:DeviceControlProcess ;
+    chameo:hasInteractionWithSample mathis-ind:SINTEF_Mathis_HotAir_Dryer2Bottom ;
+    emmo:EMMO_36e69413_8c59_4799_946c_10b05d266e22 mathis-table:D2BFanControl .
+
+mathis-table:D2BFanControl_schema_col1 a csvw:Column .
+mathis-table:D2BFanControl_schema_col1 csvw:propertyUrl equipment:hasDateTimeStampData .
+mathis-table:D2BFanControl_schema_col1 csvw:datatype xsd:dateTime .
+mathis-table:D2BFanControl_schema_col1 csvw:name "time" .
+mathis-table:D2BFanControl_schema_col1 csvw:required true .
+
+mathis-table:D2BFanControl_schema_col2 a csvw:Column .
+mathis-table:D2BFanControl_schema_col2 csvw:propertyUrl coater:hasFurnaceFanControl .
+mathis-table:D2BFanControl_schema_col2 csvw:datatype xsd:decimal .
+mathis-table:D2BFanControl_schema_col2 emmo:EMMO_bed1d005_b04e_4a90_94cf_02bc678a8569 <https://w3id.org/emmo#RevolutionPerMinute> .
+mathis-table:D2BFanControl_schema_col2 csvw:name "value" .
+mathis-table:D2BFanControl_schema_col2 csvw:required true .
+
+
+mathis-table:D2TFanControl a coater:CommandInput .
+mathis-table:D2TFanControl dc:title "Dryer2_Top_Fan_SP" .
+mathis-table:D2TFanControl csvw:tableSchema mathis-table:D2TFanControl_schema .
+
+mathis-table:D2TFanControl_schema a csvw:Schema .
+mathis-table:D2TFanControl_schema csvw:columns mathis-table:D2TFanControl_schema_col1 .
+mathis-table:D2TFanControl_schema csvw:columns mathis-table:D2TFanControl_schema_col2 .
+mathis-table:D2TFanControl_schema csvw:primaryKey "time" .
+
+mathis-table:D2TFanControl_process a mathis-table:DeviceControlProcess ;
+    chameo:hasInteractionWithSample mathis-ind:SINTEF_Mathis_HotAir_Dryer2Top ;
+    emmo:EMMO_36e69413_8c59_4799_946c_10b05d266e22 mathis-table:D2TFanControl .
+
+mathis-table:D2TFanControl_schema_col1 a csvw:Column .
+mathis-table:D2TFanControl_schema_col1 csvw:propertyUrl equipment:hasDateTimeStampData .
+mathis-table:D2TFanControl_schema_col1 csvw:datatype xsd:dateTime .
+mathis-table:D2TFanControl_schema_col1 csvw:name "time" .
+mathis-table:D2TFanControl_schema_col1 csvw:required true .
+
+mathis-table:D2TFanControl_schema_col2 a csvw:Column .
+mathis-table:D2TFanControl_schema_col2 csvw:propertyUrl coater:hasFurnaceFanControl .
+mathis-table:D2TFanControl_schema_col2 csvw:datatype xsd:decimal .
+mathis-table:D2TFanControl_schema_col2 emmo:EMMO_bed1d005_b04e_4a90_94cf_02bc678a8569 <https://w3id.org/emmo#RevolutionPerMinute> .
+mathis-table:D2TFanControl_schema_col2 csvw:name "value" .
+mathis-table:D2TFanControl_schema_col2 csvw:required true .
+
+
+mathis-table:D1BActRot a emmo:EMMO_0f6f0120_c079_4d95_bb11_4ddee05e530e .
+mathis-table:D1BActRot dc:title "Dryer1_Bottom_ActRPM" .
+mathis-table:D1BActRot csvw:tableSchema mathis-table:D1BActRot_schema .
+
+mathis-table:D1BActRot_schema a csvw:Schema .
+mathis-table:D1BActRot_schema csvw:columns mathis-table:D1BActRot_schema_col1 .
+mathis-table:D1BActRot_schema csvw:columns mathis-table:D1BActRot_schema_col2 .
+mathis-table:D1BActRot_schema csvw:primaryKey "time" .
+
+mathis-table:D1BActRot_process a chameo:CharacterisationMeasurementProcess ;
+    chameo:hasMeasurementSample mathis-ind:SINTEF_Mathis_HotAir_Dryer1Bottom ;
+    emmo:EMMO_c4bace1d_4db0_4cd3_87e9_18122bae2840 mathis-table:D1BActRot .
+
+mathis-table:D1BActRot_schema_col1 a csvw:Column .
+mathis-table:D1BActRot_schema_col1 csvw:propertyUrl equipment:hasDateTimeStampData .
+mathis-table:D1BActRot_schema_col1 csvw:datatype xsd:dateTime .
+mathis-table:D1BActRot_schema_col1 csvw:name "time" .
+mathis-table:D1BActRot_schema_col1 csvw:required true .
+
+mathis-table:D1BActRot_schema_col2 a csvw:Column .
+mathis-table:D1BActRot_schema_col2 csvw:propertyUrl coater:hasFurnaceFanData .
+mathis-table:D1BActRot_schema_col2 csvw:datatype xsd:decimal .
+mathis-table:D1BActRot_schema_col2 emmo:EMMO_bed1d005_b04e_4a90_94cf_02bc678a8569 <https://w3id.org/emmo#RevolutionPerMinute> .
+mathis-table:D1BActRot_schema_col2 csvw:name "value" .
+mathis-table:D1BActRot_schema_col2 csvw:required true .
+
+
+mathis-table:D1TActRot a emmo:EMMO_0f6f0120_c079_4d95_bb11_4ddee05e530e .
+mathis-table:D1TActRot dc:title "Dryer1_Top_ActRPM" .
+mathis-table:D1TActRot csvw:tableSchema mathis-table:D1TActRot_schema .
+
+mathis-table:D1TActRot_schema a csvw:Schema .
+mathis-table:D1TActRot_schema csvw:columns mathis-table:D1TActRot_schema_col1 .
+mathis-table:D1TActRot_schema csvw:columns mathis-table:D1TActRot_schema_col2 .
+mathis-table:D1TActRot_schema csvw:primaryKey "time" .
+
+mathis-table:D1TActRot_process a chameo:CharacterisationMeasurementProcess ;
+    chameo:hasMeasurementSample mathis-ind:SINTEF_Mathis_HotAir_Dryer1Top ;
+    emmo:EMMO_c4bace1d_4db0_4cd3_87e9_18122bae2840 mathis-table:D1TActRot .
+
+mathis-table:D1TActRot_schema_col1 a csvw:Column .
+mathis-table:D1TActRot_schema_col1 csvw:propertyUrl equipment:hasDateTimeStampData .
+mathis-table:D1TActRot_schema_col1 csvw:datatype xsd:dateTime .
+mathis-table:D1TActRot_schema_col1 csvw:name "time" .
+mathis-table:D1TActRot_schema_col1 csvw:required true .
+
+mathis-table:D1TActRot_schema_col2 a csvw:Column .
+mathis-table:D1TActRot_schema_col2 csvw:propertyUrl coater:hasFurnaceFanData .
+mathis-table:D1TActRot_schema_col2 csvw:datatype xsd:decimal .
+mathis-table:D1TActRot_schema_col2 emmo:EMMO_bed1d005_b04e_4a90_94cf_02bc678a8569 <https://w3id.org/emmo#RevolutionPerMinute> .
+mathis-table:D1TActRot_schema_col2 csvw:name "value" .
+mathis-table:D1TActRot_schema_col2 csvw:required true .
+
+
+mathis-table:D2BBActRot a emmo:EMMO_0f6f0120_c079_4d95_bb11_4ddee05e530e .
+mathis-table:D2BBActRot dc:title "Dryer2_Bottom_ActRPM" .
+mathis-table:D2BBActRot csvw:tableSchema mathis-table:D2BBActRot_schema .
+
+mathis-table:D2BBActRot_schema a csvw:Schema .
+mathis-table:D2BBActRot_schema csvw:columns mathis-table:D2BBActRot_schema_col1 .
+mathis-table:D2BBActRot_schema csvw:columns mathis-table:D2BBActRot_schema_col2 .
+mathis-table:D2BBActRot_schema csvw:primaryKey "time" .
+
+mathis-table:D2BBActRot_process a chameo:CharacterisationMeasurementProcess ;
+    chameo:hasMeasurementSample mathis-ind:SINTEF_Mathis_HotAir_Dryer2Bottom ;
+    emmo:EMMO_c4bace1d_4db0_4cd3_87e9_18122bae2840 mathis-table:D2BBActRot .
+
+mathis-table:D2BBActRot_schema_col1 a csvw:Column .
+mathis-table:D2BBActRot_schema_col1 csvw:propertyUrl equipment:hasDateTimeStampData .
+mathis-table:D2BBActRot_schema_col1 csvw:datatype xsd:dateTime .
+mathis-table:D2BBActRot_schema_col1 csvw:name "time" .
+mathis-table:D2BBActRot_schema_col1 csvw:required true .
+
+mathis-table:D2BBActRot_schema_col2 a csvw:Column .
+mathis-table:D2BBActRot_schema_col2 csvw:propertyUrl coater:hasFurnaceFanData .
+mathis-table:D2BBActRot_schema_col2 csvw:datatype xsd:decimal .
+mathis-table:D2BBActRot_schema_col2 emmo:EMMO_bed1d005_b04e_4a90_94cf_02bc678a8569 <https://w3id.org/emmo#RevolutionPerMinute> .
+mathis-table:D2BBActRot_schema_col2 csvw:name "value" .
+mathis-table:D2BBActRot_schema_col2 csvw:required true .
+
+
+mathis-table:D2TActRot a emmo:EMMO_0f6f0120_c079_4d95_bb11_4ddee05e530e .
+mathis-table:D2TActRot dc:title "Dryer2_Top_ActRPM" .
+mathis-table:D2TActRot csvw:tableSchema mathis-table:D2TActRot_schema .
+
+mathis-table:D2TActRot_schema a csvw:Schema .
+mathis-table:D2TActRot_schema csvw:columns mathis-table:D2TActRot_schema_col1 .
+mathis-table:D2TActRot_schema csvw:columns mathis-table:D2TActRot_schema_col2 .
+mathis-table:D2TActRot_schema csvw:primaryKey "time" .
+
+mathis-table:D2TActRot_process a chameo:CharacterisationMeasurementProcess ;
+    chameo:hasMeasurementSample mathis-ind:SINTEF_Mathis_HotAir_Dryer2Top ;
+    emmo:EMMO_c4bace1d_4db0_4cd3_87e9_18122bae2840 mathis-table:D2TActRot .
+
+mathis-table:D2TActRot_schema_col1 a csvw:Column .
+mathis-table:D2TActRot_schema_col1 csvw:propertyUrl equipment:hasDateTimeStampData .
+mathis-table:D2TActRot_schema_col1 csvw:datatype xsd:dateTime .
+mathis-table:D2TActRot_schema_col1 csvw:name "time" .
+mathis-table:D2TActRot_schema_col1 csvw:required true .
+
+mathis-table:D2TActRot_schema_col2 a csvw:Column .
+mathis-table:D2TActRot_schema_col2 csvw:propertyUrl coater:hasFurnaceFanData .
+mathis-table:D2TActRot_schema_col2 csvw:datatype xsd:decimal .
+mathis-table:D2TActRot_schema_col2 emmo:EMMO_bed1d005_b04e_4a90_94cf_02bc678a8569 <https://w3id.org/emmo#RevolutionPerMinute> .
+mathis-table:D2TActRot_schema_col2 csvw:name "value" .
+mathis-table:D2TActRot_schema_col2 csvw:required true .
+
+
+mathis-table:Dryer1_TempBottom a emmo:EMMO_0f6f0120_c079_4d95_bb11_4ddee05e530e .
+mathis-table:Dryer1_TempBottom dc:title "Dryer1_Bottom_ActTemperature" .
+mathis-table:Dryer1_TempBottom csvw:tableSchema mathis-table:Dryer1_TempBottom_schema .
+
+mathis-table:Dryer1_TempBottom_schema a csvw:Schema .
+mathis-table:Dryer1_TempBottom_schema csvw:columns mathis-table:Dryer1_TempBottom_schema_col1 .
+mathis-table:Dryer1_TempBottom_schema csvw:columns mathis-table:Dryer1_TempBottom_schema_col2 .
+mathis-table:Dryer1_TempBottom_schema csvw:primaryKey "time" .
+
+mathis-table:Dryer1_TempBottom_process a chameo:CharacterisationMeasurementProcess ;
+    chameo:hasMeasurementSample mathis-ind:SINTEF_Mathis_HotAir_Dryer1Bottom ;
+    emmo:EMMO_c4bace1d_4db0_4cd3_87e9_18122bae2840 mathis-table:Dryer1_TempBottom .
+
+mathis-table:Dryer1_TempBottom_schema_col1 a csvw:Column .
+mathis-table:Dryer1_TempBottom_schema_col1 csvw:propertyUrl equipment:hasDateTimeStampData .
+mathis-table:Dryer1_TempBottom_schema_col1 csvw:datatype xsd:dateTime .
+mathis-table:Dryer1_TempBottom_schema_col1 csvw:name "time" .
+mathis-table:Dryer1_TempBottom_schema_col1 csvw:required true .
+
+mathis-table:Dryer1_TempBottom_schema_col2 a csvw:Column .
+mathis-table:Dryer1_TempBottom_schema_col2 csvw:propertyUrl coater:hasFurnaceTemperatureData .
+mathis-table:Dryer1_TempBottom_schema_col2 csvw:datatype xsd:decimal .
+mathis-table:Dryer1_TempBottom_schema_col2 emmo:EMMO_bed1d005_b04e_4a90_94cf_02bc678a8569 <https://w3id.org/emmo#Kelvin> .
+mathis-table:Dryer1_TempBottom_schema_col2 csvw:name "value" .
+mathis-table:Dryer1_TempBottom_schema_col2 csvw:required true .
+
+
+mathis-table:Dryer1_TempTop a emmo:EMMO_0f6f0120_c079_4d95_bb11_4ddee05e530e .
+mathis-table:Dryer1_TempTop dc:title "Dryer1_Top_ActTemperature" .
+mathis-table:Dryer1_TempTop csvw:tableSchema mathis-table:Dryer1_TempTop_schema .
+
+mathis-table:Dryer1_TempTop_schema a csvw:Schema .
+mathis-table:Dryer1_TempTop_schema csvw:columns mathis-table:Dryer1_TempTop_schema_col1 .
+mathis-table:Dryer1_TempTop_schema csvw:columns mathis-table:Dryer1_TempTop_schema_col2 .
+mathis-table:Dryer1_TempTop_schema csvw:primaryKey "time" .
+
+mathis-table:Dryer1_TempTop_process a chameo:CharacterisationMeasurementProcess ;
+    chameo:hasMeasurementSample mathis-ind:SINTEF_Mathis_HotAir_Dryer1Top ;
+    emmo:EMMO_c4bace1d_4db0_4cd3_87e9_18122bae2840 mathis-table:Dryer1_TempTop .
+
+mathis-table:Dryer1_TempTop_schema_col1 a csvw:Column .
+mathis-table:Dryer1_TempTop_schema_col1 csvw:propertyUrl equipment:hasDateTimeStampData .
+mathis-table:Dryer1_TempTop_schema_col1 csvw:datatype xsd:dateTime .
+mathis-table:Dryer1_TempTop_schema_col1 csvw:name "time" .
+mathis-table:Dryer1_TempTop_schema_col1 csvw:required true .
+
+mathis-table:Dryer1_TempTop_schema_col2 a csvw:Column .
+mathis-table:Dryer1_TempTop_schema_col2 csvw:propertyUrl coater:hasFurnaceTemperatureData .
+mathis-table:Dryer1_TempTop_schema_col2 csvw:datatype xsd:decimal .
+mathis-table:Dryer1_TempTop_schema_col2 emmo:EMMO_bed1d005_b04e_4a90_94cf_02bc678a8569 <https://w3id.org/emmo#Kelvin> .
+mathis-table:Dryer1_TempTop_schema_col2 csvw:name "value" .
+mathis-table:Dryer1_TempTop_schema_col2 csvw:required true .
+
+
+mathis-table:Dryer2_TempBottom a emmo:EMMO_0f6f0120_c079_4d95_bb11_4ddee05e530e .
+mathis-table:Dryer2_TempBottom dc:title "Dryer2_Bottom_ActTemperature" .
+mathis-table:Dryer2_TempBottom csvw:tableSchema mathis-table:Dryer2_TempBottom_schema .
+
+mathis-table:Dryer2_TempBottom_schema a csvw:Schema .
+mathis-table:Dryer2_TempBottom_schema csvw:columns mathis-table:Dryer2_TempBottom_schema_col1 .
+mathis-table:Dryer2_TempBottom_schema csvw:columns mathis-table:Dryer2_TempBottom_schema_col2 .
+mathis-table:Dryer2_TempBottom_schema csvw:primaryKey "time" .
+
+mathis-table:Dryer2_TempBottom_process a chameo:CharacterisationMeasurementProcess ;
+    chameo:hasMeasurementSample mathis-ind:SINTEF_Mathis_HotAir_Dryer2Bottom ;
+    emmo:EMMO_c4bace1d_4db0_4cd3_87e9_18122bae2840 mathis-table:Dryer2_TempBottom .
+
+mathis-table:Dryer2_TempBottom_schema_col1 a csvw:Column .
+mathis-table:Dryer2_TempBottom_schema_col1 csvw:propertyUrl equipment:hasDateTimeStampData .
+mathis-table:Dryer2_TempBottom_schema_col1 csvw:datatype xsd:dateTime .
+mathis-table:Dryer2_TempBottom_schema_col1 csvw:name "time" .
+mathis-table:Dryer2_TempBottom_schema_col1 csvw:required true .
+
+mathis-table:Dryer2_TempBottom_schema_col2 a csvw:Column .
+mathis-table:Dryer2_TempBottom_schema_col2 csvw:propertyUrl coater:hasFurnaceTemperatureData .
+mathis-table:Dryer2_TempBottom_schema_col2 csvw:datatype xsd:decimal .
+mathis-table:Dryer2_TempBottom_schema_col2 emmo:EMMO_bed1d005_b04e_4a90_94cf_02bc678a8569 <https://w3id.org/emmo#Kelvin> .
+mathis-table:Dryer2_TempBottom_schema_col2 csvw:name "value" .
+mathis-table:Dryer2_TempBottom_schema_col2 csvw:required true .
+
+
+mathis-table:Dryer2_TempTop a emmo:EMMO_0f6f0120_c079_4d95_bb11_4ddee05e530e .
+mathis-table:Dryer2_TempTop dc:title "Dryer2_Top_ActTemperature" .
+mathis-table:Dryer2_TempTop csvw:tableSchema mathis-table:Dryer2_TempTop_schema .
+
+mathis-table:Dryer2_TempTop_schema a csvw:Schema .
+mathis-table:Dryer2_TempTop_schema csvw:columns mathis-table:Dryer2_TempTop_schema_col1 .
+mathis-table:Dryer2_TempTop_schema csvw:columns mathis-table:Dryer2_TempTop_schema_col2 .
+mathis-table:Dryer2_TempTop_schema csvw:primaryKey "time" .
+
+mathis-table:Dryer2_TempTop_process a chameo:CharacterisationMeasurementProcess ;
+    chameo:hasMeasurementSample mathis-ind:SINTEF_Mathis_HotAir_Dryer2Top ;
+    emmo:EMMO_c4bace1d_4db0_4cd3_87e9_18122bae2840 mathis-table:Dryer2_TempTop .
+
+mathis-table:Dryer2_TempTop_schema_col1 a csvw:Column .
+mathis-table:Dryer2_TempTop_schema_col1 csvw:propertyUrl equipment:hasDateTimeStampData .
+mathis-table:Dryer2_TempTop_schema_col1 csvw:datatype xsd:dateTime .
+mathis-table:Dryer2_TempTop_schema_col1 csvw:name "time" .
+mathis-table:Dryer2_TempTop_schema_col1 csvw:required true .
+
+mathis-table:Dryer2_TempTop_schema_col2 a csvw:Column .
+mathis-table:Dryer2_TempTop_schema_col2 csvw:propertyUrl coater:hasFurnaceTemperatureData .
+mathis-table:Dryer2_TempTop_schema_col2 csvw:datatype xsd:decimal .
+mathis-table:Dryer2_TempTop_schema_col2 emmo:EMMO_bed1d005_b04e_4a90_94cf_02bc678a8569 <https://w3id.org/emmo#Kelvin> .
+mathis-table:Dryer2_TempTop_schema_col2 csvw:name "value" .
+mathis-table:Dryer2_TempTop_schema_col2 csvw:required true .
+
+
+mathis-table:RewDiameterSensor a emmo:EMMO_0f6f0120_c079_4d95_bb11_4ddee05e530e .
+mathis-table:RewDiameterSensor dc:title "Rewinder_ActDiam" .
+mathis-table:RewDiameterSensor csvw:tableSchema mathis-table:RewDiameterSensor_schema .
+
+mathis-table:RewDiameterSensor_schema a csvw:Schema .
+mathis-table:RewDiameterSensor_schema csvw:columns mathis-table:RewDiameterSensor_schema_col1 .
+mathis-table:RewDiameterSensor_schema csvw:columns mathis-table:RewDiameterSensor_schema_col2 .
+mathis-table:RewDiameterSensor_schema csvw:primaryKey "time" .
+
+mathis-table:RewDiameterSensor_process a chameo:CharacterisationMeasurementProcess ;
+    chameo:hasMeasurementSample mathis-ind:SINTEF_Mathis_RewindingDevice ;
+    emmo:EMMO_c4bace1d_4db0_4cd3_87e9_18122bae2840 mathis-table:RewDiameterSensor .
+
+mathis-table:RewDiameterSensor_schema_col1 a csvw:Column .
+mathis-table:RewDiameterSensor_schema_col1 csvw:propertyUrl equipment:hasDateTimeStampData .
+mathis-table:RewDiameterSensor_schema_col1 csvw:datatype xsd:dateTime .
+mathis-table:RewDiameterSensor_schema_col1 csvw:name "time" .
+mathis-table:RewDiameterSensor_schema_col1 csvw:required true .
+
+mathis-table:RewDiameterSensor_schema_col2 a csvw:Column .
+mathis-table:RewDiameterSensor_schema_col2 csvw:propertyUrl coater:hasWinderDiameterData .
+mathis-table:RewDiameterSensor_schema_col2 csvw:datatype xsd:decimal .
+mathis-table:RewDiameterSensor_schema_col2 emmo:EMMO_bed1d005_b04e_4a90_94cf_02bc678a8569 <https://w3id.org/emmo#MicroMetre> .
+mathis-table:RewDiameterSensor_schema_col2 csvw:name "value" .
+mathis-table:RewDiameterSensor_schema_col2 csvw:required true .
+
+
+mathis-table:UnwDiameterSensor a emmo:EMMO_0f6f0120_c079_4d95_bb11_4ddee05e530e .
+mathis-table:UnwDiameterSensor dc:title "Unwinder_ActDiam" .
+mathis-table:UnwDiameterSensor csvw:tableSchema mathis-table:UnwDiameterSensor_schema .
+
+mathis-table:UnwDiameterSensor_schema a csvw:Schema .
+mathis-table:UnwDiameterSensor_schema csvw:columns mathis-table:UnwDiameterSensor_schema_col1 .
+mathis-table:UnwDiameterSensor_schema csvw:columns mathis-table:UnwDiameterSensor_schema_col2 .
+mathis-table:UnwDiameterSensor_schema csvw:primaryKey "time" .
+
+mathis-table:UnwDiameterSensor_process a chameo:CharacterisationMeasurementProcess ;
+    chameo:hasMeasurementSample mathis-ind:SINTEF_Mathis_UnwindingDevice ;
+    emmo:EMMO_c4bace1d_4db0_4cd3_87e9_18122bae2840 mathis-table:UnwDiameterSensor .
+
+mathis-table:UnwDiameterSensor_schema_col1 a csvw:Column .
+mathis-table:UnwDiameterSensor_schema_col1 csvw:propertyUrl equipment:hasDateTimeStampData .
+mathis-table:UnwDiameterSensor_schema_col1 csvw:datatype xsd:dateTime .
+mathis-table:UnwDiameterSensor_schema_col1 csvw:name "time" .
+mathis-table:UnwDiameterSensor_schema_col1 csvw:required true .
+
+mathis-table:UnwDiameterSensor_schema_col2 a csvw:Column .
+mathis-table:UnwDiameterSensor_schema_col2 csvw:propertyUrl coater:hasWinderDiameterData .
+mathis-table:UnwDiameterSensor_schema_col2 csvw:datatype xsd:decimal .
+mathis-table:UnwDiameterSensor_schema_col2 emmo:EMMO_bed1d005_b04e_4a90_94cf_02bc678a8569 <https://w3id.org/emmo#MicroMetre> .
+mathis-table:UnwDiameterSensor_schema_col2 csvw:name "value" .
+mathis-table:UnwDiameterSensor_schema_col2 csvw:required true .
+
+
+mathis-table:UnwWebTension a emmo:EMMO_0f6f0120_c079_4d95_bb11_4ddee05e530e .
+mathis-table:UnwWebTension dc:title "Unwinder_ActTensionN" .
+mathis-table:UnwWebTension csvw:tableSchema mathis-table:UnwWebTension_schema .
+
+mathis-table:UnwWebTension_schema a csvw:Schema .
+mathis-table:UnwWebTension_schema csvw:columns mathis-table:UnwWebTension_schema_col1 .
+mathis-table:UnwWebTension_schema csvw:columns mathis-table:UnwWebTension_schema_col2 .
+mathis-table:UnwWebTension_schema csvw:primaryKey "time" .
+
+mathis-table:UnwWebTension_process a chameo:CharacterisationMeasurementProcess ;
+    chameo:hasMeasurementSample mathis-ind:SINTEF_Mathis_UnwindingDevice ;
+    emmo:EMMO_c4bace1d_4db0_4cd3_87e9_18122bae2840 mathis-table:UnwWebTension .
+
+mathis-table:UnwWebTension_schema_col1 a csvw:Column .
+mathis-table:UnwWebTension_schema_col1 csvw:propertyUrl equipment:hasDateTimeStampData .
+mathis-table:UnwWebTension_schema_col1 csvw:datatype xsd:dateTime .
+mathis-table:UnwWebTension_schema_col1 csvw:name "time" .
+mathis-table:UnwWebTension_schema_col1 csvw:required true .
+
+mathis-table:UnwWebTension_schema_col2 a csvw:Column .
+mathis-table:UnwWebTension_schema_col2 csvw:propertyUrl coater:hasWinderTensionData .
+mathis-table:UnwWebTension_schema_col2 csvw:datatype xsd:decimal .
+mathis-table:UnwWebTension_schema_col2 emmo:EMMO_bed1d005_b04e_4a90_94cf_02bc678a8569 <https://w3id.org/emmo#Newton> .
+mathis-table:UnwWebTension_schema_col2 csvw:name "value" .
+mathis-table:UnwWebTension_schema_col2 csvw:required true .
+

@@ -1,0 +1,199 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        
+            <script src="lib/bindings/utils.js"></script>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/dist/vis-network.min.css" integrity="sha512-WgxfT5LWjfszlPHXRmBWHkV2eceiWTOBvrKCNbdgDYTHrT2AeLCGbF4sZlZw3UMN3WtL0tGUoIAKsu8mllg/XA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/vis-network.min.js" integrity="sha512-LnvoEWDFrqGHlHmDD2101OrLcbsfkrzoSpvtSQtxK3RMnRV0eOkhhBN2dXHKRrUU8p2DGRTk35n4O8nWSVe1mQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+            
+        
+<center>
+<h1></h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+        <link
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
+          crossorigin="anonymous"
+        />
+        <script
+          src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+          crossorigin="anonymous"
+        ></script>
+
+
+        <center>
+          <h1></h1>
+        </center>
+        <style type="text/css">
+
+             #mynetwork {
+                 width: 100%;
+                 height: 750px;
+                 background-color: #ffffff;
+                 border: 1px solid lightgray;
+                 position: relative;
+                 float: left;
+             }
+
+             
+
+             
+
+             
+        </style>
+    </head>
+
+
+    <body>
+
+        <!-- Display the image and associate it with the map -->
+        <img src="../coaterdryer_steps_diagram.png" usemap="#image-map" alt="Process steps Image" width="608" height="125">
+
+        <!-- Define the image map -->
+        <map name="image-map">
+            <!-- Rectangle area -->
+            <area shape="rect" coords="17,7,131,115" href="https://yahoo.fr" alt="Rectangle Area" target="_blank">
+            <!-- Rectangle area -->
+            <area shape="rect" coords="166,7,315,115" href="https://google.com" alt="Rectangle Area" target="_blank">
+            <!-- Rectangle area -->
+            <area shape="rect" coords="346,7,449,115" href="https://bing.fr" alt="Rectangle Area" target="_blank">
+            
+        </map>
+        
+        <div class="card" style="width: 100%">
+            
+            
+            <div id="mynetwork" class="card-body"></div>
+        </div>
+
+        
+        
+
+        <script type="text/javascript">
+
+              // initialize global variables.
+              var edges;
+              var nodes;
+              var allNodes;
+              var allEdges;
+              var nodeColors;
+              var originalNodes;
+              var network;
+              var container;
+              var options, data;
+              var filter = {
+                  item : '',
+                  property : '',
+                  value : []
+              };
+
+              
+
+              
+
+              // This method is responsible for drawing the graph, returns the drawn network
+              function drawGraph() {
+                  var container = document.getElementById('mynetwork');
+
+                  
+
+                  // parsing and collecting nodes and edges from the python
+                  nodes = new vis.DataSet([{"color": "#97c2fc", "font": {"color": "black"}, "id": "https://w3id.org/mathis-ind/public/ontology#SINTEF_Mathis_Coater", "label": "SINTEF Mathis coater", "shape": "dot", "title": ["Device model Mathis KTF-S 29421"]}, {"color": "#97c2fc", "font": {"color": "black"}, "id": "https://w3id.org/mathis-ind/public/ontology#SINTEF_Mathis_UnwindingDevice", "label": "SINTEF Mathis UnwindingDevice", "shape": "dot", "title": ["Device model unknown"]}, {"color": "#97c2fc", "font": {"color": "black"}, "id": "https://w3id.org/mathis-ind/public/ontology#SINTEF_Mathis_RewindingDevice", "label": "SINTEF Mathis RewindingDevice", "shape": "dot", "title": ["Device model unknown"]}, {"color": "#97c2fc", "font": {"color": "black"}, "id": "https://w3id.org/mathis-ind/public/ontology#SINTEF_Mathis_IR_DryerDevice", "label": "SINTEF Mathis IR_DryerDevice", "shape": "dot", "title": ["Device model unknown"]}, {"color": "#97c2fc", "font": {"color": "black"}, "id": "https://w3id.org/mathis-ind/public/ontology#SINTEF_Mathis_HotAir_DryerDevice", "label": "SINTEF Mathis HotAir_DryerDevice", "shape": "dot", "title": ["Device model unknown"]}, {"color": "#97c2fc", "font": {"color": "black"}, "id": "https://w3id.org/mathis-ind/public/ontology#SINTEF_Mathis_HotAir_Dryer1Device", "label": "SINTEF Mathis HotAir_Dryer1Device", "shape": "dot", "title": ["Device model unknown"]}, {"color": "#97c2fc", "font": {"color": "black"}, "id": "https://w3id.org/mathis-ind/public/ontology#SINTEF_Mathis_HotAir_Dryer1Bottom", "label": "SINTEF Mathis HotAir_DryerDevice1Bottom", "shape": "dot", "title": ["Device model unknown"]}, {"color": "#97c2fc", "font": {"color": "black"}, "id": "https://w3id.org/mathis-ind/public/ontology#SINTEF_Mathis_HotAir_Dryer1Top", "label": "SINTEF Mathis HotAir_DryerDevice1Top", "shape": "dot", "title": ["Device model unknown"]}, {"color": "#97c2fc", "font": {"color": "black"}, "id": "https://w3id.org/mathis-ind/public/ontology#SINTEF_Mathis_HotAir_Dryer2Device", "label": "SINTEF Mathis HotAir_Dryer2Device", "shape": "dot", "title": ["Device model unknown"]}, {"color": "#97c2fc", "font": {"color": "black"}, "id": "https://w3id.org/mathis-ind/public/ontology#SINTEF_Mathis_HotAir_Dryer2Bottom", "label": "SINTEF Mathis HotAir_DryerDevice2Bottom", "shape": "dot", "title": ["Device model unknown"]}, {"color": "#97c2fc", "font": {"color": "black"}, "id": "https://w3id.org/mathis-ind/public/ontology#SINTEF_Mathis_HotAir_Dryer2Top", "label": "SINTEF Mathis HotAir_DryerDevice2Top", "shape": "dot", "title": ["Device model unknown"]}]);
+                  edges = new vis.DataSet([{"arrows": "to", "from": "https://w3id.org/mathis-ind/public/ontology#SINTEF_Mathis_Coater", "title": "hasDevice", "to": "https://w3id.org/mathis-ind/public/ontology#SINTEF_Mathis_UnwindingDevice"}, {"arrows": "to", "from": "https://w3id.org/mathis-ind/public/ontology#SINTEF_Mathis_Coater", "title": "hasDevice", "to": "https://w3id.org/mathis-ind/public/ontology#SINTEF_Mathis_RewindingDevice"}, {"arrows": "to", "from": "https://w3id.org/mathis-ind/public/ontology#SINTEF_Mathis_Coater", "title": "hasDevice", "to": "https://w3id.org/mathis-ind/public/ontology#SINTEF_Mathis_IR_DryerDevice"}, {"arrows": "to", "from": "https://w3id.org/mathis-ind/public/ontology#SINTEF_Mathis_Coater", "title": "hasDevice", "to": "https://w3id.org/mathis-ind/public/ontology#SINTEF_Mathis_HotAir_DryerDevice"}, {"arrows": "to", "from": "https://w3id.org/mathis-ind/public/ontology#SINTEF_Mathis_HotAir_DryerDevice", "title": "hasPart", "to": "https://w3id.org/mathis-ind/public/ontology#SINTEF_Mathis_HotAir_Dryer1Device"}, {"arrows": "to", "from": "https://w3id.org/mathis-ind/public/ontology#SINTEF_Mathis_HotAir_Dryer1Device", "title": "hasPart", "to": "https://w3id.org/mathis-ind/public/ontology#SINTEF_Mathis_HotAir_Dryer1Bottom"}, {"arrows": "to", "from": "https://w3id.org/mathis-ind/public/ontology#SINTEF_Mathis_HotAir_Dryer1Device", "title": "hasPart", "to": "https://w3id.org/mathis-ind/public/ontology#SINTEF_Mathis_HotAir_Dryer1Top"}, {"arrows": "to", "from": "https://w3id.org/mathis-ind/public/ontology#SINTEF_Mathis_HotAir_DryerDevice", "title": "hasPart", "to": "https://w3id.org/mathis-ind/public/ontology#SINTEF_Mathis_HotAir_Dryer2Device"}, {"arrows": "to", "from": "https://w3id.org/mathis-ind/public/ontology#SINTEF_Mathis_HotAir_Dryer2Device", "title": "hasPart", "to": "https://w3id.org/mathis-ind/public/ontology#SINTEF_Mathis_HotAir_Dryer2Bottom"}, {"arrows": "to", "from": "https://w3id.org/mathis-ind/public/ontology#SINTEF_Mathis_HotAir_Dryer2Device", "title": "hasPart", "to": "https://w3id.org/mathis-ind/public/ontology#SINTEF_Mathis_HotAir_Dryer2Top"}]);
+
+                  nodeColors = {};
+                  allNodes = nodes.get({ returnType: "Object" });
+                  for (nodeId in allNodes) {
+                    nodeColors[nodeId] = allNodes[nodeId].color;
+                  }
+                  allEdges = edges.get({ returnType: "Object" });
+                  // adding nodes and edges to the graph
+                  data = {nodes: nodes, edges: edges};
+
+                  var options = {"nodes": {"shape": "dot", "size": 18, "font": {"size": 14}, "borderWidth": 2}, "edges": {"arrows": {"to": {"enabled": true, "scaleFactor": 0.8}}, "smooth": {"type": "dynamic"}}, "interaction": {"hover": true, "multiselect": true}};
+
+                  
+
+
+                  
+
+                  network = new vis.Network(container, data, options);
+
+                  
+
+                  
+
+                  
+
+
+                  
+
+                  return network;
+
+              }
+              drawGraph();
+        </script>
+    
+<!-- ─── Node‑detail modal (auto‑injected) ─────────────────────────────── -->
+<style>
+.modal {
+  display:none; position:fixed; z-index:1000; left:0; top:0;
+  width:100%; height:100%; overflow:auto;
+  background:rgba(0,0,0,0.4);
+}
+.modal-content {
+  background:#fff; margin:10% auto; padding:20px; border:1px solid #888;
+  width:60%; border-radius:8px; max-width:700px;
+}
+.modal-close {
+  float:right; font-size:1.2rem; font-weight:bold; cursor:pointer;
+}
+</style>
+
+<div id="detailModal" class="modal">
+  <div class="modal-content">
+    <span id="modalClose" class="modal-close">&times;</span>
+    <div id="modalBody"></div>
+  </div>
+</div>
+
+<script type="text/javascript">
+const nodeDetails = {"https://w3id.org/mathis-ind/public/ontology#SINTEF_Mathis_Coater": "<h3>SINTEF Mathis coater</h3>\n        <p>Status: Online</p>\n        <p><b>ID</b>: https://w3id.org/mathis-ind/public/ontology#SINTEF_Mathis_Coater</p>\n        <p><b>Equipment description</b>: Coater and dryer equipment for the production of rolled electrodes.</p>\n        \n        <p><b>Characteristics:</b></p>\n        <ul>\n              <li>Substrate Width: 300.0 mm</li>\n              <li>Max coating speed: 10.0 mm/s</li>\n        </ul>", "https://w3id.org/mathis-ind/public/ontology#SINTEF_Mathis_UnwindingDevice": "<h3>SINTEF Mathis UnwindingDevice</h3>\n        <p>Status: Online</p>\n        <p><b>ID</b>: https://w3id.org/mathis-ind/public/ontology#SINTEF_Mathis_UnwindingDevice</p>\n        <p><b>Equipment description</b>: Unwinding device to unroll the substrate foil for the production of rolled electrodes.</p>\n        ", "https://w3id.org/mathis-ind/public/ontology#SINTEF_Mathis_RewindingDevice": "<h3>SINTEF Mathis RewindingDevice</h3>\n        <p>Status: Online</p>\n        <p><b>ID</b>: https://w3id.org/mathis-ind/public/ontology#SINTEF_Mathis_RewindingDevice</p>\n        <p><b>Equipment description</b>: Rewinding device to roll the coated substrate foil for the production of rolled electrodes.</p>\n        ", "https://w3id.org/mathis-ind/public/ontology#SINTEF_Mathis_IR_DryerDevice": "<h3>SINTEF Mathis IR_DryerDevice</h3>\n        <p>Status: Online</p>\n        <p><b>ID</b>: https://w3id.org/mathis-ind/public/ontology#SINTEF_Mathis_IR_DryerDevice</p>\n        <p><b>Equipment description</b>: Dyer device based on IR energy source to heat and dry the coated substrate foil for the production of rolled electrodes.</p>\n        ", "https://w3id.org/mathis-ind/public/ontology#SINTEF_Mathis_HotAir_DryerDevice": "<h3>SINTEF Mathis HotAir_DryerDevice</h3>\n        <p>Status: Online</p>\n        <p><b>ID</b>: https://w3id.org/mathis-ind/public/ontology#SINTEF_Mathis_HotAir_DryerDevice</p>\n        <p><b>Equipment description</b>: Dyer device based on a furnace with Hot Air to heat and dry the coated substrate foil for the production of rolled electrodes.</p>\n        ", "https://w3id.org/mathis-ind/public/ontology#SINTEF_Mathis_HotAir_Dryer1Device": "<h3>SINTEF Mathis HotAir_Dryer1Device</h3>\n        <p>Status: Online</p>\n        <p><b>ID</b>: https://w3id.org/mathis-ind/public/ontology#SINTEF_Mathis_HotAir_Dryer1Device</p>\n        <p><b>Equipment description</b>: First furnace in the Dyer device based on a furnace with Hot Air to heat and dry the coated substrate foil for the production of rolled electrodes.</p>\n        ", "https://w3id.org/mathis-ind/public/ontology#SINTEF_Mathis_HotAir_Dryer1Bottom": "<h3>SINTEF Mathis HotAir_DryerDevice1Bottom</h3>\n        <p>Status: Online</p>\n        <p><b>ID</b>: https://w3id.org/mathis-ind/public/ontology#SINTEF_Mathis_HotAir_Dryer1Bottom</p>\n        <p><b>Equipment description</b>: Bottom Part of First furnace in the Dyer device based on a furnace with Hot Air to heat and dry the coated substrate foil for the production of rolled electrodes.</p>\n        ", "https://w3id.org/mathis-ind/public/ontology#SINTEF_Mathis_HotAir_Dryer1Top": "<h3>SINTEF Mathis HotAir_DryerDevice1Top</h3>\n        <p>Status: Online</p>\n        <p><b>ID</b>: https://w3id.org/mathis-ind/public/ontology#SINTEF_Mathis_HotAir_Dryer1Top</p>\n        <p><b>Equipment description</b>: Top part of First furnace in the Dyer device based on a furnace with Hot Air to heat and dry the coated substrate foil for the production of rolled electrodes.</p>\n        ", "https://w3id.org/mathis-ind/public/ontology#SINTEF_Mathis_HotAir_Dryer2Device": "<h3>SINTEF Mathis HotAir_Dryer2Device</h3>\n        <p>Status: Online</p>\n        <p><b>ID</b>: https://w3id.org/mathis-ind/public/ontology#SINTEF_Mathis_HotAir_Dryer2Device</p>\n        <p><b>Equipment description</b>: Second furnace in the Dyer device based on a furnace with Hot Air to heat and dry the coated substrate foil for the production of rolled electrodes.</p>\n        ", "https://w3id.org/mathis-ind/public/ontology#SINTEF_Mathis_HotAir_Dryer2Bottom": "<h3>SINTEF Mathis HotAir_DryerDevice2Bottom</h3>\n        <p>Status: Online</p>\n        <p><b>ID</b>: https://w3id.org/mathis-ind/public/ontology#SINTEF_Mathis_HotAir_Dryer2Bottom</p>\n        <p><b>Equipment description</b>: Bottom Part of Second furnace in the Dyer device based on a furnace with Hot Air to heat and dry the coated substrate foil for the production of rolled electrodes.</p>\n        ", "https://w3id.org/mathis-ind/public/ontology#SINTEF_Mathis_HotAir_Dryer2Top": "<h3>SINTEF Mathis HotAir_DryerDevice2Top</h3>\n        <p>Status: Online</p>\n        <p><b>ID</b>: https://w3id.org/mathis-ind/public/ontology#SINTEF_Mathis_HotAir_Dryer2Top</p>\n        <p><b>Equipment description</b>: Top part of Second furnace in the Dyer device based on a furnace with Hot Air to heat and dry the coated substrate foil for the production of rolled electrodes.</p>\n        "};
+
+function showModal(html) {
+  const modal      = document.getElementById("detailModal");
+  const modalBody  = document.getElementById("modalBody");
+  modalBody.innerHTML = html;
+  modal.style.display = "block";
+}
+
+function hideModal() {
+  document.getElementById("detailModal").style.display = "none";
+}
+
+document.getElementById("modalClose").onclick = hideModal;
+window.onclick = (event) => {
+  const modal = document.getElementById("detailModal");
+  if (event.target === modal) hideModal();
+};
+
+// Hook into pyvis / Vis.js
+// 'network' is the Vis Network instance injected by pyvis
+network.on("click", function(params) {
+  if (params.nodes.length > 0) {
+    const id = params.nodes[0];
+    if (nodeDetails[id]) {
+      showModal(nodeDetails[id]);
+    }
+  }
+});
+</script>
+<!-- ───────────────────────────────────────────────────────────────────── -->
+
+</body>
+</html>

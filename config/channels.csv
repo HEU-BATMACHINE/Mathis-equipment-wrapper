@@ -1,1 +1,17 @@
 ns;label;name;category;device;property;unit;type
+coater;PyrometerIR_Dryer;IR_Dryer_PyrometerTemp;measurement;mathis-ind:SINTEF_Mathis_IR_DryerDevice;coater:hasIRPyrometerTemperatureData;<https://w3id.org/emmo#DegreeCelsius>;REAL
+coater;D1BFanControl;Dryer1_Bottom_Fan_SP;control;mathis-ind:SINTEF_Mathis_HotAir_Dryer1Bottom;coater:hasFurnaceFanControl;<https://w3id.org/emmo#RevolutionPerMinute>;REAL
+coater;D1TFanControl;Dryer1_Top_Fan_SP;control;mathis-ind:SINTEF_Mathis_HotAir_Dryer1Top;coater:hasFurnaceFanControl;<https://w3id.org/emmo#RevolutionPerMinute>;REAL
+coater;D2BFanControl;Dryer2_Bottom_Fan_SP;control;mathis-ind:SINTEF_Mathis_HotAir_Dryer2Bottom;coater:hasFurnaceFanControl;<https://w3id.org/emmo#RevolutionPerMinute>;REAL
+coater;D2TFanControl;Dryer2_Top_Fan_SP;control;mathis-ind:SINTEF_Mathis_HotAir_Dryer2Top;coater:hasFurnaceFanControl;<https://w3id.org/emmo#RevolutionPerMinute>;REAL
+coater;D1BActRot;Dryer1_Bottom_ActRPM;measurement;mathis-ind:SINTEF_Mathis_HotAir_Dryer1Bottom;coater:hasFurnaceFanData;<https://w3id.org/emmo#RevolutionPerMinute>;REAL
+coater;D1TActRot;Dryer1_Top_ActRPM;measurement;mathis-ind:SINTEF_Mathis_HotAir_Dryer1Top;coater:hasFurnaceFanData;<https://w3id.org/emmo#RevolutionPerMinute>;REAL
+coater;D2BBActRot;Dryer2_Bottom_ActRPM;measurement;mathis-ind:SINTEF_Mathis_HotAir_Dryer2Bottom;coater:hasFurnaceFanData;<https://w3id.org/emmo#RevolutionPerMinute>;REAL
+coater;D2TActRot;Dryer2_Top_ActRPM;measurement;mathis-ind:SINTEF_Mathis_HotAir_Dryer2Top;coater:hasFurnaceFanData;<https://w3id.org/emmo#RevolutionPerMinute>;REAL
+coater;Dryer1_TempBottom;Dryer1_Bottom_ActTemperature;measurement;mathis-ind:SINTEF_Mathis_HotAir_Dryer1Bottom;coater:hasFurnaceTemperatureData;<https://w3id.org/emmo#Kelvin>;REAL
+coater;Dryer1_TempTop;Dryer1_Top_ActTemperature;measurement;mathis-ind:SINTEF_Mathis_HotAir_Dryer1Top;coater:hasFurnaceTemperatureData;<https://w3id.org/emmo#Kelvin>;REAL
+coater;Dryer2_TempBottom;Dryer2_Bottom_ActTemperature;measurement;mathis-ind:SINTEF_Mathis_HotAir_Dryer2Bottom;coater:hasFurnaceTemperatureData;<https://w3id.org/emmo#Kelvin>;REAL
+coater;Dryer2_TempTop;Dryer2_Top_ActTemperature;measurement;mathis-ind:SINTEF_Mathis_HotAir_Dryer2Top;coater:hasFurnaceTemperatureData;<https://w3id.org/emmo#Kelvin>;REAL
+coater;RewDiameterSensor;Rewinder_ActDiam;measurement;mathis-ind:SINTEF_Mathis_RewindingDevice;coater:hasWinderDiameterData;<https://w3id.org/emmo#MicroMetre>;REAL
+coater;UnwDiameterSensor;Unwinder_ActDiam;measurement;mathis-ind:SINTEF_Mathis_UnwindingDevice;coater:hasWinderDiameterData;<https://w3id.org/emmo#MicroMetre>;REAL
+coater;UnwWebTension;Unwinder_ActTensionN;measurement;mathis-ind:SINTEF_Mathis_UnwindingDevice;coater:hasWinderTensionData;<https://w3id.org/emmo#Newton>;REAL

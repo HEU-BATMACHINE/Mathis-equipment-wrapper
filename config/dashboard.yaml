@@ -14,56 +14,41 @@ dashboard:
   schema_version: 39
   tags:
     - BATMACHINE
-    - equipment-wrapper
     - semantic-dashboard
 
 #   Property appears in multiple equipment wrappers.
 generic:
-  title: "<equipmentname> generic equipment dashboard"
+  title: "Mathis generic equipment dashboard"
 
   description: >
-    Describe the set of semantic properties that represent functionality
-    commonly available across multiple equipment wrappers.
-
-    Typical examples include furnace temperatures, fan speeds,
-    winding parameters, process temperatures, pressures, flow rates,
-    and other measurements that can be compared across different
-    equipment types.
+    This dashboard plots measurement channels represented by semantic
+    properties that can be used across compatible coating and drying
+    equipment. Signals are grouped according to their semantic property
+    and physical unit.
 
   properties:
-    # Add semantic properties that are expected to be present
-    # in multiple equipment wrappers.
-    #
-    # Example:
-    # - coater:hasWinderDiameterData
-    # - coater:hasWinderTensionData
-    # - coater:hasFurnaceTemperatureData
-    # - coater:hasFurnaceFanData
-    #
-    # Add one property per line.
+    - coater:hasWinderDiameterData
+    - coater:hasWinderTensionData
+    - coater:hasFurnaceTemperatureData
+    - coater:hasFurnaceFanData
 
 # Property appears only in the current equipment wrapper.
 equipment_specific:
-  title: "<equipmentname> equipment-specific dashboard"
+  title: "Mathis equipment-specific dashboard"
 
   description: >
-    Describe semantic properties that are unique to this equipment
-    wrapper and are not generally expected to be available across
-    other equipment.
+    This dashboard plots semantic properties that are unique to the
+    Mathis coating equipment wrapper and are not available in the FOM
+    equipment wrapper.
 
-    Typical examples include machine-specific controls, unique sensors,
-    proprietary process measurements, specialised positioning systems,
-    or equipment-specific operating parameters.
+    The displayed signals represent Mathis-specific functionality,
+    including IR pyrometer temperature measurements used to monitor
+    web temperature within the dryer and fan control setpoints used
+    to configure dryer operating conditions. These properties are
+    specific to the current equipment configuration and may not be
+    available on other coating systems.
 
   properties:
-    # Add semantic properties that are specific to this equipment.
-    #
-    # Example:
-    # - coater:hasWebSpeedData
-    # - coater:hasCoaterHeadHorizontalPositionControl
-    # - coater:hasCoaterHeadVerticalPositionControl
-    # - coater:hasIRPyrometerTemperatureData
-    # - coater:hasFurnacePowerData
-    #
-    # Add one property per line.
+    - coater:hasIRPyrometerTemperatureData
+    - coater:hasFurnaceFanControl
     
